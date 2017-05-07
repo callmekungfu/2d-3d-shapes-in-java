@@ -1,0 +1,6 @@
+﻿Square
+Rectangle
+Rhombus
+Kite
+Parallelogram
+Isosceles Trapezoid

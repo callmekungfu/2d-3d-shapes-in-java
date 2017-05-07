@@ -198,7 +198,7 @@ class Square extends TwoDimensional{
 	@Override
 	public String toString() {
 		return "Square Number " + id + " of " + getNumOfSquare() + " has the unique ID - " + getId() + "\nArea=" + findArea() + ", \nPerimeter=" + findPerimeter()
-		+ ", Side Length=" + getSideAlpha() + "\n, Color=" + getColor();
+		+ ", \nSide Length=" + getSideAlpha() + ", \nColor=" + getColor();
 	}
 	@Override
 	public int hashCode() {
