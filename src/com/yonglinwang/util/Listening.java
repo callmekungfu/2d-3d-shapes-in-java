@@ -49,6 +49,7 @@ public class Listening{
                 break;
             }
             System.err.println("Please input a double value. eg: " + ThreadLocalRandom.current().nextDouble(0, 100 + 1));
+            in.next();
         }
         return temp;
     }
@@ -60,7 +61,7 @@ public class Listening{
         }
         in.close();
     }
-    public String withPrompt(String message, String dataType){
+    public String withPrompt(String message){
         System.out.print(message);
         String text = in.next();
         return text;

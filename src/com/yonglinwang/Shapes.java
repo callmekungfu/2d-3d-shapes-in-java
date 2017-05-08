@@ -1,55 +1,53 @@
 package com.yonglinwang;
 
 import java.awt.Color;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.ThreadLocalRandom;
 
 import com.yonglinwang.util.InputReader;
 import com.yonglinwang.util.Listening;
 import com.yonglinwang.util.Prompting;
 
 /**
- * Created by Yonglin Wang on 4/19/2017.
+ * Crafted by Yonglin Wang through May.
  */
 public final class Shapes {
-	Prompting p = new Prompting();
-	Listening listen = new Listening();
-	List<Shape> database = new ArrayList<>();
+	private Prompting p = new Prompting();
+	private Listening listen = new Listening();
+	private Database database = new Database();
 	public static void main(String[] args) {
 		Prompting p = new Prompting();
 		Listening listen = new Listening();
 		Shapes local = new Shapes();
+
+		boolean inMenu = true;
+
 		p.type("\nHello There! Welcome to yonglinDB!\n\n", 50);
 		p.printSpacing();
-		p.print("The purpose of this database is to use the object-oriented programming concepts discussed in ICS4U1.  \n" +
+		p.print("The purpose of this Database is to use the object-oriented programming concepts discussed in ICS4U1.  \n" +
 				"The system implement a series of classes that simulates geometric shapes: \n2D four sided - " +
 				"square, rectangle, rhombus, parallelogram, trapezoid, kite, and 3D six faced – cube, rectangular prism. \n");
-		p.print("The database also includes methods to determine advanced properties of a geometric shape (the area, perimeter, " +
-				"surface area, volume). \nThe database is also able to keep track of the number geometric shape created, " +
+		p.print("The Database also includes methods to determine advanced properties of a geometric shape (the area, perimeter, " +
+				"surface area, volume). \nThe Database is also able to keep track of the number geometric shape created, " +
 				"as well as the number of each type of geometric shape created.");
 		p.printSpacing();
-		while (true) {
+		while (inMenu) {
 			p.print("Please continue with command, if you need help type <help>");
-			String command = listen.listen();
-			String selector = command.toUpperCase();
-			switch (selector) {
+			switch (listen.listen().toUpperCase()) {
 				case "HELP":
 					local.printHelp();
 					break;
 				case "INSERT":
 					p.type("LOADING...",200);
-					local.createNewObject(command);
+					local.createNewObject();
 					break;
 				case "LIST":
+					System.out.println(local.database);
+					p.printSpacing();
 					break;
 				case "DROP":
+					local.dropDatabase();
 					break;
 				case "PUBLISH":
 					break;
@@ -60,13 +58,17 @@ public final class Shapes {
 				case "ADMIN":
 					break;
 				case "EXIT":
+					inMenu = false;
+					// TODO add save operation method
+					System.out.println("Thank you for using YonglinDB! Have a fantastic day!");
 					break;
 				default:
 					p.printError("Command not recognized, please try again");
 					p.printSpacing();
 			}
 		}
-
+		local.listen.stop();
+		listen.stop();
 	}
 	private void printHelp(){
 		InputReader input;
@@ -82,15 +84,15 @@ public final class Shapes {
 			System.out.printf("IO Exception Occured");
 		}
 	}
-	private void createNewObject(String command){
+	private void createNewObject(){
 		p.printSpacing();
-		p.print("Welcome to Yonglin's geometry database insertion wizard!\n");
-		switch(listen.withPrompt("2D or 3D: ", "string").toUpperCase()){
+		p.print("Welcome to Yonglin's geometry Database insertion wizard!\n");
+		switch(listen.withPrompt("2D or 3D: ").toUpperCase()){
 			case "2D":
 				p.print("Here is a list of shapes you can create:");
 				p.print("2D Shapes: ");
 				p.printList("C:\\Users\\Yonglin Wang\\Documents\\GitHub\\2d-3d-shapes-in-java\\2d.txt", "number");
-				switch(listen.withPrompt("Name or number of shape: ", "string").toUpperCase()){
+				switch(listen.withPrompt("Name or number of shape: ").toUpperCase()){
 					case "SQUARE":
 					case "1":
 						database.add(new Square(listen.withPromptForDouble("Side Length: "), Color.black));
@@ -124,11 +126,12 @@ public final class Shapes {
 					default:
 						System.out.println("Requested shape not recognized, returning back to home.");
 				}
+				break;
 			case "3D":
 				p.print("Here is a list of shapes you can create:");
 				p.print("3D Shapes: ");
 				p.printList("C:\\Users\\Yonglin Wang\\Documents\\GitHub\\2d-3d-shapes-in-java\\3d.txt", "number");
-				switch(listen.withPrompt("Name or number of shape: ", "string").toUpperCase()){
+				switch(listen.withPrompt("Name or number of shape: ").toUpperCase()){
 					case "CUBE":
 					case "1":
 						database.add(new Cube(listen.withPromptForDouble("Side Length: "),Color.magenta));
@@ -152,8 +155,10 @@ public final class Shapes {
 					default:
 						p.printError("Requested shape not recognized, returning back to home.");
 				}
+				break;
+			default:
+				p.printError("Requested shape not recognized, returning back to home.");
 		}
-
 
 		p.printSpacing();
 	}
@@ -162,7 +167,23 @@ public final class Shapes {
 		p.print("A new " + shape.toUpperCase() + " is created, here are the details: ");
 		p.print(database.get(database.size()-1).toString());
 	}
+	private void dropDatabase(){
+		if(listen.withPrompt("Confirm this operation by typing <verisimilitude>").equals("verisimilitude")) {
+			database.clear();
+			p.print("Operation successful, database is dropped");
+		}else
+			p.print("Operation canceled.");
+	}
 }
 
-
+class Database extends ArrayList<Shape>{
+	@Override
+	public String toString() {
+		String text = "";
+		for (int i = 0; i < size(); i++){
+			text += get(i).toString() + "\n\n";
+		}
+		return text;
+	}
+}
 

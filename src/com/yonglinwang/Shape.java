@@ -511,7 +511,7 @@ class Cube extends ThreeDimensional{
 	@Override
 	public String toString() {
 		return "Cube Number " + id + " of " + getNumOfCubes() + " has the unique ID - " + getId() + "\nSideAlpha=" + getSideAlpha() + ", \nSurface Area="
-				+ findSurfaceArea() + ", \nVolume=" + findVolume() + "\n, Color=" + getColor();
+				+ findSurfaceArea() + ", \nVolume=" + findVolume() + ", \nColor=" + getColor();
 	}
 	@Override
 	public int hashCode() {
