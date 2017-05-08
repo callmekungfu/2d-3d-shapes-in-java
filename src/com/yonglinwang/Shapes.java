@@ -13,9 +13,31 @@ import com.yonglinwang.util.Prompting;
  * Crafted by Yonglin Wang through May.
  */
 public final class Shapes {
+	/**
+	 * This creates a global prompting system to allow methods to
+	 * display prompts to users.
+	 */
 	private Prompting p = new Prompting();
+	/**
+	 * This creates a global listening system to allow methods to
+	 * display listen to user input.
+	 */
 	private Listening listen = new Listening();
+	/**
+	 * This is the object that will be storing all the records. Declared
+	 * globally so all use class methods can utilize it.
+	 */
 	private Database database = new Database();
+	/**
+	 * <pre>Assembles the use methods to form a use class</pre>
+	 * <h2>Method Explaination</h2>
+	 * <p>The <code>Main(String)</code> acts as the client hub for YonglinDB. It uses switch and
+	 * cases to determine user command and calls the respective procedural method to execute the
+	 * operation the user requested.
+	 * <p>The system operates on an infinite while loop until user inputs the exit command to exit
+	 * from the query system
+	 * 
+	 */
 	public static void main(String[] args) {
 		Prompting p = new Prompting();
 		Listening listen = new Listening();
@@ -176,7 +198,7 @@ public final class Shapes {
 	}
 }
 
-class Database extends ArrayList<Shape>{
+class Database extends ArrayList<? extends Shape>{
 	@Override
 	public String toString() {
 		String text = "";
