@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -74,7 +75,15 @@ public class Listening{
         System.out.print(message);
         return forDouble();
     }
-    public Color withPromptForColor(String message){
-        return Color.BLACK;
+    public Color forColor(){
+        Color color;
+        try {
+            Field field = Class.forName("java.awt.Color").getField(withPrompt("Color: "));
+            color = (Color)field.get(null);
+        } catch (Exception e) {
+            System.err.println("This color does not exist in the color space. Color is set to null.");
+            color = null; // Not defined
+        }
+        return color;
     }
 }

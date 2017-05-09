@@ -1,9 +1,9 @@
-﻿<admin>     Open the object selection window, which allows modification and deletation of objects;
+﻿<credit>    Check out who poured their sweat into this product
 <insert>    Create a new object, <-type> represents the shape and can be ignored;
 <drop>      Drop all the records in the database
 <debug>     Prompts the state of the database
 <list>      List out all the objects created in chronological order;
-<print>     Print the details of a specific object with id;
+<search>    Print the details of a specific object with id;
 <publish>   Publish the database in a format specified by <-doc> command, if doc command is not specified, a prompt will open
 <reset>     Reset the database to factory state
 <settings>  Open settings menu
