@@ -46,13 +46,16 @@ Simply paste the src file into any IDE workspace to use the code, there are no p
 * Rectangular Prism
 * Regular Pentagonal Pyramid
 
-## Input, Output, Process, Storage
+## Input, Output, Storage
 This section describes the IO process of the database
 ### Input
-This program accepts a wide range of inputs, here are a list of them -
+This program accepts a wide range of inputs, here is a list of them -
 + Commands ([insert],[help],[publish])
-+ Variable information
++ Record property data
 ### Output
-
-### Process
+This program makes numerous outputs to improve user experience -
++ Instruction Prompts
++ Record Information
++ Database reporting
 ### Storage
++ The database in a unique binary format.
