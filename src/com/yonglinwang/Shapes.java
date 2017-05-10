@@ -1,9 +1,17 @@
 package com.yonglinwang;
 
 import java.awt.Color;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.yonglinwang.util.InputReader;
 import com.yonglinwang.util.Listening;
@@ -46,7 +54,7 @@ public final class Shapes {
 
 		boolean inMenu = true;
 
-		p.type("\nHello There! Welcome to yonglinDB!\n\n", 50);
+		p.type("\nHello There! Welcome to YonglinDB!\n", 50);
 		p.printSpacing();
 		p.print("The purpose of this Database is to use the object-oriented programming concepts discussed in ICS4U1.  \n" +
 				"The system implement a series of classes that simulates geometric shapes: \n2D four sided - " +
@@ -73,8 +81,10 @@ public final class Shapes {
 					local.dropDatabase();
 					break;
 				case "PUBLISH":
+					local.publishDatabase();
 					break;
 				case "SEARCH":
+					local.searchDatabase();
 					break;
 				case "SETTINGS":
 					break;
@@ -123,6 +133,8 @@ public final class Shapes {
 		double sideLength;
 		p.printSpacing();
 		p.print("Welcome to Yonglin's geometry Database insertion wizard! Type anything unexpected to exit.\n");
+		boolean forDefault = listen.forBooleanWithPrompt("Y","Create objects with default properties? (Y/n): ");
+		forDefault = !forDefault;
 		switch(listen.withPrompt("2D or 3D: ").toUpperCase()){
 			case "2D":
 				p.print("\nHere is a list of shapes you can create:");
@@ -132,96 +144,119 @@ public final class Shapes {
 				switch(listen.withPrompt("Name or number of shape: ").toUpperCase()){
 					case "SQUARE":
 					case "1":
-						do{
-							sideLength = listen.withPromptForDouble("Side Length: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side length = " + sideLength);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Square(sideLength, color));
+						if (forDefault) {
+							do{
+                                sideLength = listen.withPromptForDouble("Side Length: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side length = " + sideLength);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Square(sideLength, color));
+						}else
+							database.add(new Square());
 						creationDonePrompt("square");
 						break;
 					case "RECTANGLE":
 					case "2":
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							sideB = listen.withPromptForDouble("Side B: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("side B = " + sideB);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Rectangle(sideA,sideB,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                sideB = listen.withPromptForDouble("Side B: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("side B = " + sideB);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Rectangle(sideA,sideB,color));
+						} else {
+							database.add(new Rectangle());
+						}
 						creationDonePrompt("Rectangle");
 						break;
 					case "KITE":
 					case "4":
 						double diagonalQ, diagonalP;
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							sideB = listen.withPromptForDouble("Side B: ");
-							diagonalQ = listen.withPromptForDouble("Diagonal Q: ");
-							diagonalP = listen.withPromptForDouble("Diagonal P: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("diagonal P = " + diagonalP);
-							System.out.println("diagonal Q = " + diagonalQ);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Kite(sideA,sideB,diagonalQ,diagonalP,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                sideB = listen.withPromptForDouble("Side B: ");
+                                diagonalQ = listen.withPromptForDouble("Diagonal Q: ");
+                                diagonalP = listen.withPromptForDouble("Diagonal P: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("diagonal P = " + diagonalP);
+                                System.out.println("diagonal Q = " + diagonalQ);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Kite(sideA,sideB,diagonalQ,diagonalP,color));
+						} else {
+							database.add(new Kite());
+						}
 						creationDonePrompt("kite");
 						break;
 					case "RHOMBUS":
 					case "3":
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							height = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("Height = " + height);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Rhombus(sideA,height,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                height = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("Height = " + height);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Rhombus(sideA,height,color));
+						} else {
+							database.add(new Rhombus());
+						}
 						creationDonePrompt("rhombus");
 						break;
 					case "PARALLELOGRAM":
 					case "5":
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							sideB = listen.withPromptForDouble("Side B: ");
-							height = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("side B = " + sideB);
-							System.out.println("height = " + height);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Parallelogram(sideA,sideB,height,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                sideB = listen.withPromptForDouble("Side B: ");
+                                height = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("side B = " + sideB);
+                                System.out.println("height = " + height);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Parallelogram(sideA,sideB,height,color));
+						} else {
+							database.add(new Parallelogram());
+						}
 						creationDonePrompt("parallelogram");
 						break;
 					case "ISOSCELES TRAPEZOID":
 					case "6":
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							sideB = listen.withPromptForDouble("Side B: ");
-							sideC = listen.withPromptForDouble("Side C: ");
-							sideD = listen.withPromptForDouble("Side D: ");
-							height = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("side B = " + sideB);
-							System.out.println("side C = " + sideC);
-							System.out.println("side D = " + sideD);
-							System.out.println("height = " + height);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new IsoscelesTrapezoid(sideA,sideB,sideC,sideD,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                sideB = listen.withPromptForDouble("Side B: ");
+                                sideC = listen.withPromptForDouble("Side C: ");
+                                sideD = listen.withPromptForDouble("Side D: ");
+                                height = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("side B = " + sideB);
+                                System.out.println("side C = " + sideC);
+                                System.out.println("side D = " + sideD);
+                                System.out.println("height = " + height);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new IsoscelesTrapezoid(sideA,sideB,sideC,sideD,color));
+						} else {
+							database.add(new IsoscelesTrapezoid());
+						}
 						creationDonePrompt("isosceles trapezoid");
 						break;
 					default:
@@ -236,60 +271,76 @@ public final class Shapes {
 				switch(listen.withPrompt("Name or number of shape: ").toUpperCase()){
 					case "CUBE":
 					case "1":
-						do{
-							sideLength = listen.withPromptForDouble("Side: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side length = " + sideLength);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new Cube(sideLength,color));
+						if (forDefault) {
+							do{
+                                sideLength = listen.withPromptForDouble("Side: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side length = " + sideLength);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new Cube(sideLength,color));
+						} else {
+							database.add(new Cube());
+						}
 						creationDonePrompt("Cube");
 						break;
 					case "SQUARE BASED PRISM":
 					case "2":
-						do{
-							sideLength = listen.withPromptForDouble("Side Length: ");
-							height = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side length = " + sideLength);
-							System.out.println("height = " + height);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new SquareBasedPrism(sideLength,height,color));
+						if (forDefault) {
+							do{
+                                sideLength = listen.withPromptForDouble("Side Length: ");
+                                height = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side length = " + sideLength);
+                                System.out.println("height = " + height);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new SquareBasedPrism(sideLength,height,color));
+						} else {
+							database.add(new SquareBasedPrism());
+						}
 						creationDonePrompt("Square Based Prism");
 						break;
 					case "RECTANGULAR PRISM":
 					case "3":
-						do{
-							sideA = listen.withPromptForDouble("Width: ");
-							sideB = listen.withPromptForDouble("Length: ");
-							sideC = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("width = " + sideA);
-							System.out.println("height = " + sideB);
-							System.out.println("length = " + sideC);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new RectangularPrism(sideA,sideB,sideC,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Width: ");
+                                sideB = listen.withPromptForDouble("Length: ");
+                                sideC = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("width = " + sideA);
+                                System.out.println("height = " + sideB);
+                                System.out.println("length = " + sideC);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new RectangularPrism(sideA,sideB,sideC,color));
+						} else {
+							database.add(new RectangularPrism());
+						}
 						creationDonePrompt("RECTANGULAR prism");
 						break;
 					case "REGULAR PENTAGONAL PRISM":
 					case "4":
-						do{
-							sideA = listen.withPromptForDouble("Side A: ");
-							sideB = listen.withPromptForDouble("Side B: ");
-							height = listen.withPromptForDouble("Height: ");
-							color = listen.forColor();
-							System.out.println("\nYour Input: ");
-							System.out.println("side A = " + sideA);
-							System.out.println("side B = " + sideB);
-							System.out.println("length = " + height);
-							System.out.println("color = " + color + "\n");
-						}while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
-						database.add(new RegularPentagonalPyramid(sideA,sideB,height,color));
+						if (forDefault) {
+							do{
+                                sideA = listen.withPromptForDouble("Side A: ");
+                                sideB = listen.withPromptForDouble("Side B: ");
+                                height = listen.withPromptForDouble("Height: ");
+                                color = listen.forColor();
+                                System.out.println("\nYour Input: ");
+                                System.out.println("side A = " + sideA);
+                                System.out.println("side B = " + sideB);
+                                System.out.println("length = " + height);
+                                System.out.println("color = " + color + "\n");
+                            }while(!listen.withPrompt("Confirm? (Y/n) ").equals("Y"));
+							database.add(new RegularPentagonalPyramid(sideA,sideB,height,color));
+						} else {
+							database.add(new RegularPentagonalPyramid(0,0,0,Color.BLACK));
+						}
 						creationDonePrompt("REGULAR PENTAGONAL PRISM");
 						break;
 					default:
@@ -314,6 +365,32 @@ public final class Shapes {
 		}else
 			p.print("Operation canceled.");
 	}
+	private void searchDatabase(){
+		p.print("Welcome to YonglinDB search wizard! Type anything unexpected to exit.\n");
+		String id = listen.withPrompt("ID of object: ");
+		p.printSpacing();
+		p.print("Here is the result of your search query: ");
+		try {
+			p.print(database.search(id));
+			p.printSpacing();
+		} catch (Exception e) {
+			p.printError("\tNo records with id - " + id + " found in database. :(");
+			p.printSpacing();
+		}
+	}
+	private void publishDatabase(){
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String fileName = dateFormat.format(date) + "-report.txt";
+		StringBuilder report = new StringBuilder();
+		/*List<String> lines = Arrays.asList("The first line", "The second line");
+		Path file = Paths.get(fileName);
+		try {
+			Files.write(file, lines, Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+	}
 }
 
 class Database extends ArrayList<Shape>{
@@ -325,5 +402,11 @@ class Database extends ArrayList<Shape>{
 		}
 		return text.toString();
 	}
+	public String search(String id){
+		for (Shape item:this) {
+			if(item.getId().equals(id))
+				return item.toString();
+		}
+		throw new NoSuchElementException();
+	}
 }
-

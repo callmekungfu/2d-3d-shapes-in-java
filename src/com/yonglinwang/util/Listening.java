@@ -54,6 +54,11 @@ public class Listening{
         }
         return temp;
     }
+    public boolean forBooleanWithPrompt(String trueStatement,String message){
+        if(withPrompt(message).equals(trueStatement))
+            return true;
+        return false;
+    }
     public void stop(){
         try {
             br.close();

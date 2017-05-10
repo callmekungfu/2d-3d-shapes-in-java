@@ -17,7 +17,7 @@ public class Prompting{
     private Date date;
 
     public Prompting(String s) {
-        dateFormat = new SimpleDateFormat();
+        dateFormat = new SimpleDateFormat(s);
         date = new Date();
     }
 

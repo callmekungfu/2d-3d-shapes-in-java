@@ -1,17 +1,12 @@
 package com.yonglinwang;
 
-/**
- * Created by Yonglin Wang on 4/19/2017.
- */
+
 import java.awt.Color;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-/**
- * @author 349120427
- *
- */
+
 public abstract class Shape {
 	private Color color;
 	private SecureRandom random = new SecureRandom();
@@ -22,7 +17,7 @@ public abstract class Shape {
 
 	public Shape(Color color){
 		this.color = color;
-		id = new BigInteger(64, random).toString(32);
+		id = new BigInteger(16, random).toString(16);
 	}
 	public Color getColor(){
 		return color;
