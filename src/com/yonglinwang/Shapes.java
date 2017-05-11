@@ -18,8 +18,45 @@ import com.yonglinwang.util.Listening;
 import com.yonglinwang.util.Prompting;
 
 /**
- * 
+ * <h1>YonglinDB</h1>
+ * <pre>A comprehensive example of object-oriented programming in Java 8</pre>
+ * <h2>Project Description</h2>
+ * <p>
+ *     YonglinDB is created for a grade 12 computer science course in Unionville High School. It resembles a temporary
+ *     database which allows users to create 2-dimensional/3-dimensional shapes through inputting crucial properties. The
+ *     program then inserts all the data into a private database, in which properties are only accessable through the use
+ *     of built in accessor and modifier methods.
+ * </p>
+ * <p>
+ *     The challenge of this project was seen as how to write the logic, not how to define the data. Object-oriented programming
+ *     takes the view that what we really care about are the objects we want to manipulate rather than the logic required to
+ *     manipulate them.
+ * </p>
+ * <h3>Principal</h3>
+ * <p>
+ *     To best utilize polymorphism, overriding, data modeling and encapsulation techniques learned in class.
+ * </p>
+ * <h3>Standard Features</h3>
+ * <ul>
+ *     <li>Encapsulation of geometric shape properties, only accessible through methods</li>
+ *     <li>Class level counting properties implemented</li>
+ *     <li>High variable efficiency</li>
+ *     <li>Default constructors for indecisive users</li>
+ *     <li>A one of a kind geometry hierarchy implemented in {@code Shapes.java}</li>
+ *     <li>Easy to use, foolproof command prompt interface</li>
+ * </ul>
+ * <h3>Unique Features</h3>
+ * <ul>
+ *     <li>Robust input listener that prevents input human error</li>
+ *     <li>Database status report</li>
+ *     <li>Database records report</li>
+ *     <li>One of a kind output tracker</li>
+ *     <li>User setting and profile system</li>
+ *     <li> Robust query system</li>
+ *     <li>SAVE DATABASE INFORMATION ON HARD DRIVE!</li>
+ * </ul>
  * Crafted by Yonglin Wang through May.
+ * @version 1.2.1
  */
 public final class Shapes {
 	/**
@@ -92,7 +129,6 @@ public final class Shapes {
 					break;
 				case "EXIT":
 					inMenu = false;
-					// TODO add save operation method
 					System.out.println("Thank you for using YonglinDB! Have a fantastic day!");
 					break;
 				default:
@@ -106,15 +142,14 @@ public final class Shapes {
 	/**
 	 * <pre>Display a list of available commands</pre>
 	 * <h2>Method Explanation</h2>
-	 * <p>The <code>Main(String)</code> acts as the client hub for YonglinDB. It uses switch and
-	 * cases to determine user command and calls the respective procedural method to execute the
-	 * operation the user requested.
-	 * <p>The system operates on an infinite while loop until user inputs the exit command to exit
-	 * from the query system
-	 *
+	 * <p>The <code>printHelp(String)</code> method looks for a file titled "help.txt" in the project folder
+     * Then displays the content of the file using the YonglinDB custom prompting toolkit.
+     *
+	 * @see com.yonglinwang.util.Prompting
 	 */
 	private void printHelp(){
 		InputReader input;
+
 		try {
 			input = new InputReader("C:\\Users\\Yonglin Wang\\Documents\\GitHub\\2d-3d-shapes-in-java\\help.txt");
 			p.printSpacing();
@@ -124,9 +159,17 @@ public final class Shapes {
 		}catch(FileNotFoundException fe){
 			System.out.println("File Cannot be found");
 		}catch (IOException e){
-			System.out.printf("IO Exception Occured");
+			System.out.printf("IO Exception Occurred");
 		}
 	}
+
+    /**
+     * <pre>Assemble the procedures of inserting a new object into the database</pre>
+     *
+     * <p>
+     *
+     * </p>
+     */
 	private void createNewObject(){
 		Color color;
 		double sideA, sideB, sideC, sideD, height;

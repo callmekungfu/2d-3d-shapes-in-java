@@ -1,0 +1,11 @@
+-----------------------------------------------------------------
+|								|
+|			YonglinDB Report			|
+|		Generated at - 2017/05/17, 13:00		|
+|								|
+-----------------------------------------------------------------
+|			   Statistics:				|	
+|		Number of shapes: 12				|
+|		Number of 2-dimensional shapes: 8		|
+|		Number of 3-dimensional shapes: 4		|
+|		Number of Squares:				|
