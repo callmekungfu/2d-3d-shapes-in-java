@@ -6,7 +6,9 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-
+/**
+ *
+ */
 public abstract class Shape {
 	private Color color;
 	private SecureRandom random = new SecureRandom();
@@ -27,6 +29,9 @@ public abstract class Shape {
 	}
 	public String getId() {
 		return id;
+	}
+	public void setId(String id){
+		this.id = id;
 	}
 	@Override
 	public int hashCode() {
@@ -79,6 +84,7 @@ abstract class ThreeDimensional extends Shape{
 
 	public ThreeDimensional(Color color){
 		super(color);
+		numOfThreeD++;
 	}
 
 	public ThreeDimensional(){

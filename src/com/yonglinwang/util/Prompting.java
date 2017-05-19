@@ -55,7 +55,7 @@ public class Prompting{
             try {
                 unit.sleep(delay);
             } catch (InterruptedException e) {
-                System.err.println("Process Inturupted, Returning");
+                System.err.println("Process Interrupted, Returning");
             }
         }
         System.out.print("\n");
@@ -93,7 +93,7 @@ public class Prompting{
         }catch(FileNotFoundException fe){
             System.out.println("File Cannot be found");
         }catch (IOException e){
-            System.out.printf("IO Exception Occured");
+            System.out.printf("IO Exception Occurred");
         }
     }
     public static void log(String prompt){
