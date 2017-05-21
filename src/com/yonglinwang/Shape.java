@@ -24,6 +24,8 @@ import java.security.SecureRandom;
  * 		from occurring when creating this method.
  * </p>
  * @author Yonglin Wang
+ * @version 1.1
+ *
  * @see java.math.BigInteger
  * @see java.security.SecureRandom
  */
@@ -124,92 +126,238 @@ public abstract class Shape {
  * <p>
  * 		Abstract class for recording 2-dimensional shapes for YonglinDB. The only methods required
  * 		to be overridden are findArea() and findPerimeter() since most shapes calculate those properties
- * 		differently. 
+ * 		differently. It is recommended to not override any other methods in this class.
  * </p>
  * <p>
- * 		The default constructor of this class renders the shape black.
+ * 		The default constructor of this class renders the shape black. User is able to define a new color
+ * 		for the shapes created.
  * </p>
  * @author Yonglin Wang
- * @see Shape
- * @since 1.7
+ * @version 1.1
+ *
+ * @see com.yonglinwang.Shape
  */
 abstract class TwoDimensional extends Shape{
 	/**
 	 * A static variable that stores the number of two dimensional shapes created.
 	 */
 	private static int numOfTwoD = 0;
+
+	/**
+	 * Constructs a TwoDimensional shape with a user defined color.
+	 * @param color A java awt color that the shape will be rendered in.
+	 */
 	public TwoDimensional(Color color){
 		super(color);
 		numOfTwoD++;
 	}
+
+	/**
+	 * Default constructor, constructs a black TwoDimensional shape.
+	 */
 	public TwoDimensional(){
 		this(Color.black);
 	}
+
+	/**
+	 * <pre>Calculate the area of a two dimensional shape</pre>
+	 * <p>
+	 *     This method is defined abstract in the TwoDimensional Class. For detailed processing documentation
+	 *     please refer to inherited subclasses.
+	 * </p>
+	 * @return The calculated area of the shape
+	 */
 	public abstract double findArea();
+
+	/**
+	 * <pre>Calculate the perimeter of a two dimensional shape</pre>
+	 * <p>
+	 *     This method is defined abstract in the TwoDimensional Class. For detailed processing documentation
+	 *     please refer to inherited subclasses.
+	 * </p>
+	 * @return The calculated perimeter of the shape
+	 */
 	public abstract double findPerimeter();
 
+	/**
+	 * <pre>Obtain the number of two dimensional shapes created</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     This method serves the same purpose as the page counter in Office Word. The class variable is incremented
+	 *     whenever the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return An integer containing the number of two dimensional shapes created
+	 */
 	public static int getNumOfTwoD() {
 		return numOfTwoD;
 	}
 
 }
 
+/**
+ * <pre>An abstract class that implements 3-dimensional shapes</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ * 		Abstract class for recording 3-dimensional shapes for YonglinDB. The only methods required
+ * 		to be overridden are findSurfaceArea() and findVolume() since most shapes calculate those properties
+ * 		differently. It is recommended to not override any other methods in this class.
+ * </p>
+ * <p>
+ * 		The default constructor of this class renders the shape black. User is able to define a new color
+ * 		for the shapes created.
+ * </p>
+ * @author Yonglin Wang
+ * @version 1.1
+ *
+ * @see com.yonglinwang.Shape
+ */
 abstract class ThreeDimensional extends Shape{
+	/**
+	 *
+	 */
 	private static int numOfThreeD = 0;
 
-
+	/**
+	 * Constructs a ThreeDimensional shape with user defined Java AWT color
+	 * @param color A java awt color that the shape will be rendered in.
+	 */
 	public ThreeDimensional(Color color){
 		super(color);
 		numOfThreeD++;
 	}
-
+	/**
+	 * Default Constructor that creates a black ThreeDimensional Shape.
+	 */
 	public ThreeDimensional(){
 		this(Color.black);
 	}
 
+	/**
+	 * <pre>Obtain the number of three dimensional shapes created</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     This method serves the same purpose as the page counter in Office Word. The class variable is incremented
+	 *     whenever the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return An integer containing the number of three dimensional shapes created
+	 */
 	public static int getNumOfThreeD() {
 		return numOfThreeD;
 	}
 
+	/**
+	 * <pre>Calculate the surface area of a three dimensional shape</pre>
+	 * <p>
+	 *     This method is defined abstract in the ThreeDimensional Class. For detailed processing documentation
+	 *     please refer to inherited subclasses.
+	 * </p>
+	 * @return The calculated surface area of the shape
+	 */
 	public abstract double findSurfaceArea();
+	/**
+	 * <pre>Calculate the volume of a three dimensional shape</pre>
+	 * <p>
+	 *     This method is defined abstract in the ThreeDimensional Class. For detailed processing documentation
+	 *     please refer to inherited subclasses.
+	 * </p>
+	 * @return The calculated volume of the shape
+	 */
 	public abstract double findVolume();
 }
 
+/**
+ * <pre>Concrete implementation of a rectangle in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, instantiable class that implements the properties and functionality of a rectangle for YonglinDB.
+ *     The Rectangle object can be instantiated with three vital pieces of information - length of side A, length of
+ *     side B, and the color of the shape.
+ * </p>
+ * <p>
+ *     The rectangle class directly inherits its properties from the Square object to minimize the amount of properties
+ *     needed to be created. This is required for this programming task as its purpose is to demonstrate object orientation
+ *     programming concepts such as polymorphism learned in class.
+ * </p>
+ * <p>
+ *     The objects contain an array of behaviors that enables users to document rectangle shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.Square
+ * @see com.yonglinwang.TwoDimensional
+ */
 final class Rectangle extends Square{
+	/**
+	 * Class level variable that hosts the total number of Rectangles created.
+	 */
 	private static int numOfRect = 0;
+	/**
+	 * Unique identification digit of this rectangle for shape counting feature.
+	 */
 	private int id;
+	/**
+	 * The value of the second side length of the rectangle.
+	 */
 	private double sideBravo;
+
+	/**
+	 * Constructs a rectangle object by calling the parent constructor, instantiating the instance variables, increment
+	 * the class level counter by one.
+	 *
+	 * @param sideAlpha The width of the rectangle.
+	 * @param sideBravo The length of the rectangle.
+	 * @param color A java awt color that the shape will be rendered in.
+	 */
 	public Rectangle(double sideAlpha, double sideBravo, Color color){
 		super(sideAlpha, color);
 		this.sideBravo = sideBravo;
 		numOfRect++;
 		id = numOfRect;
 	}
+
+	/**
+	 * Default constructor that creates a black void Rectangle
+	 */
 	public Rectangle(){
 		this(0,0, Color.black);
 	}
 
+	/**
+	 * Calculates the area of the rectangle with user defined properties.
+	 * @return The area of the rectangle
+	 */
 	@Override
 	public double findArea() {
 		return sideBravo * getSideAlpha();
 	}
 
+	/**
+	 * Calculates the perimeter of the rectangle with user defined properties.
+	 * @return The perimeter of the rectangle
+	 */
 	@Override
 	public double findPerimeter() {
 		return 2 * sideBravo + 2 * getSideAlpha();
 	}
 
+	/**
+	 * Accessor method for the side B property, use this to get a copy of the value.
+	 * @param sideBravo The value of side B
+	 */
 	public void setSideBravo(double sideBravo) {
 		this.sideBravo = sideBravo;
 	}
-
 	public double getSideBravo() {
 		return sideBravo;
 	}
-
 	public static int getNumOfRectangles() {
 		return numOfRect;
 	}
+
 	@Override
 	public String toString() {
 		return "Rectangle Number " + id + " of " + getNumOfRectangles() +". With the unique ID - " + getId() +" \nArea=" + findArea() + ", \nPerimeter="
