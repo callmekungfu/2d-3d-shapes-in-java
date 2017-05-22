@@ -213,7 +213,7 @@ abstract class TwoDimensional extends Shape{
  */
 abstract class ThreeDimensional extends Shape{
 	/**
-	 *
+	 * A static variable that stores the number of two dimensional shapes created.
 	 */
 	private static int numOfThreeD = 0;
 
@@ -269,7 +269,7 @@ abstract class ThreeDimensional extends Shape{
  * <pre>Concrete implementation of a rectangle in YonglinDB</pre>
  * <h2>Class Explanation</h2>
  * <p>
- *     Inheritable, instantiable class that implements the properties and functionality of a rectangle for YonglinDB.
+ *     Instantiable class that implements the properties and functionality of a rectangle for YonglinDB.
  *     The Rectangle object can be instantiated with three vital pieces of information - length of side A, length of
  *     side B, and the color of the shape.
  * </p>
@@ -345,19 +345,36 @@ final class Rectangle extends Square{
 	}
 
 	/**
-	 * Accessor method for the side B property, use this to get a copy of the value.
+	 * Modifier method for the side B property, use this to make changes to side B value.
 	 * @param sideBravo The value of side B
 	 */
 	public void setSideBravo(double sideBravo) {
 		this.sideBravo = sideBravo;
 	}
+	/**
+	 * Accessor method for the side B property, use this to get a copy of the value.
+	 * @return The value of side B
+	 */
 	public double getSideBravo() {
 		return sideBravo;
 	}
+	/**
+	 * <pre>Obtain the number of rectangle shapes created</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     This method serves the same purpose as the page counter in Office Word. The class variable is incremented
+	 *     whenever the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return An integer containing the number of rectangles shapes created
+	 */
 	public static int getNumOfRectangles() {
 		return numOfRect;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	@Override
 	public String toString() {
 		return "Rectangle Number " + id + " of " + getNumOfRectangles() +". With the unique ID - " + getId() +" \nArea=" + findArea() + ", \nPerimeter="
@@ -389,10 +406,59 @@ final class Rectangle extends Square{
 
 }
 
+/**
+ * <pre>Concrete implementation of mathematical shape square in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical square for
+ *     YonglinDB. The Square object can be instantiated with these vital pieces of information - side length, and the
+ *     color of the shape.
+ * </p>
+ * <p>
+ *     The square class is the main parent of all two dimensional shapes due to its simplicity of having only a single
+ *     unique behavior of side length which is present on nearly all two dimensional shapes. This gives every other object
+ *     a foundation to work on.
+ * </p>
+ * <p>
+ *     The objects contain an array of behaviors that enables users to document square shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.TwoDimensional
+ */
 class Square extends TwoDimensional{
+	/**
+	 * Class level variable that hosts the total number of Square created.
+	 */
 	private static int numOfSquare = 0;
+	/**
+	 * The variable that stores the value of the side length.
+	 */
 	private double sideAlpha;
+	/**
+	 * The unique identification digit of the instance. Used for Square # of #
+	 */
 	private int id;
+
+	/**
+	 * <pre>Constructs a Square instance.</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a Square. Which includes calling the parent
+	 *     constructor to apply the color, assigning the side length and id number, increments the number of squares
+	 *     counter if the class created is equal to a square.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the square constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to Square.class
+	 *     will the counter increment.
+	 * </p>
+	 * @param sideAlpha The value of the side length
+	 * @param color A JAVA AWT Color that defines the rendering details
+	 */
 	public Square(double sideAlpha, Color color){
 		super(color);
 		this.sideAlpha = sideAlpha;
@@ -400,9 +466,19 @@ class Square extends TwoDimensional{
 			numOfSquare++;
 		id = numOfSquare;
 	}
+
+	/**
+	 * Default constructor for the square object.
+	 */
 	public Square(){
 		this(0, Color.black);
 	}
+
+	/**
+	 * Calculates and returns the area of the square using the formula
+	 * <p>{@code }</p>
+	 * @return
+	 */
 	@Override
 	public double findArea() {
 		return sideAlpha * sideAlpha;
