@@ -533,6 +533,12 @@ public final class Shapes {
 }
 
 class Database extends ArrayList<Shape>{
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @return A String containing all the information regarding all the instances in the database
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		StringBuilder text = new StringBuilder();
@@ -541,31 +547,90 @@ class Database extends ArrayList<Shape>{
 		}
 		return text.toString();
 	}
-	public String search(String id){
+
+	/**
+	 * <pre>Query for a specific instance in the database</pre>
+	 * <p>
+	 *     The get method uses a simple linear search algorithm and seeks for an object with identical id as the parameter.
+	 *     If an object is found, its id is changed to a new one defined in the parameter.
+	 * </p>
+	 * <p>
+	 *     If the query goes unanswered, the method throws a no such element exception to warn the user agent about the
+	 *     error.
+	 * </p>
+	 * @param oldID The id of the item that should be changed
+	 * @param newID The new id
+	 */
+	public void changeID(String oldID, String newID){
+		int count = 0;
 		for (Shape item:this) {
-			if(item.getId().equals(id))
-				return item.toString();
+			if(item.getId().equals(oldID)){
+				item.setId(newID);
+				System.out.println("An item has changed id from - '" + oldID + "' to - '" + newID + "'.");
+				count++;
+			}
 		}
-		throw new NoSuchElementException();
+		if (count == 0)
+			throw new NoSuchElementException();
+		System.out.println("Query has been processed. " + count + "objects have changed ID.");
 	}
 
-	public void changeID(String oldID, String newID){
-		search(oldID);
-		for (Shape item:this) {
-			if(item.getId().equals(oldID))
-				item.setId(newID);
-		}
-	}
+	/**
+	 * Wrapper method for {@link List#clear()}, allow more personal features to be implemented in the future.
+	 * @see List
+	 * @see List#clear()
+	 */
 	public void drop(){
 		this.clear();
 	}
+
+	/**
+	 * Wrapper method for {@link List#add(Object)}, allows more personal features to be implemented in the future.
+	 * @param s A Shape class or any subclass of a shape class.
+	 */
 	public void insert(Shape s){
 		this.add(s);
 	}
+
+	/**
+	 * <pre>Query for a specific instance in the database</pre>
+	 * <p>
+	 *     The get method uses a simple linear search algorithm and seeks for an object with identical id as the parameter.
+	 *     If an object is found, it is immediately returned to the user agent.
+	 * </p>
+	 * <p>
+	 *     If the query goes unanswered, the method throws a no such element exception to warn the user agent about the
+	 *     error.
+	 * </p>
+	 * @param id The String identification of the instance to be queried
+	 * @return The object if found, if not NoSuchElementException is thrown
+	 * @throws NoSuchElementException
+	 */
 	public Shape get(String id){
 		for (Shape item:this) {
 			if(item.getId().equals(id))
 				return item;
+		}
+		throw new NoSuchElementException();
+	}
+
+	/**
+	 * <pre>Query for a specific instance in the database</pre>
+	 * <p>
+	 *     The get method uses a simple linear search algorithm and seeks for an object with identical id as the parameter.
+	 *     If an object is found, it is immediately returned to the user agent.
+	 * </p>
+	 * <p>
+	 *     If the query goes unanswered, the method throws a no such element exception to warn the user agent about the
+	 *     error.
+	 * </p>
+	 * @param id The String identification of the instance to be queried
+	 * @return A string containing the information of the queried item
+	 */
+	public String search(String id){
+		for (Shape item:this) {
+			if(item.getId().equals(id))
+				return item.toString();
 		}
 		throw new NoSuchElementException();
 	}
