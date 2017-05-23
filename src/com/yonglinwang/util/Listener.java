@@ -12,10 +12,10 @@ import java.lang.reflect.Field;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Listening{
+public class Listener {
     BufferedReader br;
     Scanner in;
-    public Listening(){
+    public Listener(){
         br = new BufferedReader(new InputStreamReader(System.in));
         in = new Scanner(System.in);
     }

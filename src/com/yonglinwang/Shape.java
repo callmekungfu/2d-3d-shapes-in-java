@@ -372,8 +372,10 @@ final class Rectangle extends Square{
 	}
 
 	/**
+	 * Overridden from Java Object class.
 	 *
-	 * @return
+	 * @return A string containing all the information regarding the instance
+	 * @see Object#toString()
 	 */
 	@Override
 	public String toString() {
@@ -381,6 +383,11 @@ final class Rectangle extends Square{
 				+ findPerimeter() + ", \nSideB=" + getSideBravo() + ", \nSideA=" + getSideAlpha()
 				+ ", \nColor=" + getColor();
 	}
+	/**
+	 * Overridden from Java Object class.
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -390,6 +397,11 @@ final class Rectangle extends Square{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * Overridden from Java Object class.
+	 *
+	 * @see java.lang.Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -443,6 +455,7 @@ class Square extends TwoDimensional{
 	 */
 	private int id;
 
+
 	/**
 	 * <pre>Constructs a Square instance.</pre>
 	 * <h2>Method Explanation</h2>
@@ -466,7 +479,6 @@ class Square extends TwoDimensional{
 			numOfSquare++;
 		id = numOfSquare;
 	}
-
 	/**
 	 * Default constructor for the square object.
 	 */
@@ -474,33 +486,78 @@ class Square extends TwoDimensional{
 		this(0, Color.black);
 	}
 
+
 	/**
-	 * Calculates and returns the area of the square using the formula
-	 * <p>{@code }</p>
-	 * @return
+	 * <pre>Process the area of a square instance in YonglinDB</pre>
+	 * Calculates and returns the area of the square using the area formula:
+	 * <p>{@code A = a^2}</p>
+	 * @return The area of the instance square.
 	 */
 	@Override
 	public double findArea() {
 		return sideAlpha * sideAlpha;
 	}
+
+	/**
+	 * <pre>Process the perimeter of a square instance in YonglinDB</pre>
+	 * Calculates and returns the perimeter of the square using the perimeter formula:
+	 * <p>{@code P = a*4}</p>
+	 * @return The perimeter of the instance square.
+	 */
 	@Override
 	public double findPerimeter() {
 		return 4 * sideAlpha;
 	}
+
+
+	/**
+	 * <pre>Accessor method for the side length property</pre>
+	 * <p>
+	 *     Side length of a square is an important property of a square as it can be used in the calculation of both the
+	 *     perimeter and the area of the square.
+	 * </p>
+	 * @return Value of the side length
+	 */
 	public double getSideAlpha(){
 		return sideAlpha;
 	}
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Side length of a square is an important property of a square as it can be used in the calculation of both the
+	 *     perimeter and the area of the square.
+	 * </p>
+	 * @param sideAlpha side length of the instance, should be greater than 0 and smaller than Double.MAX_VALUE
+	 */
 	public void setSideAlpha(double sideAlpha){
 		this.sideAlpha = sideAlpha;
 	}
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of squares created.
+	 */
 	public static int getNumOfSquare() {
 		return numOfSquare;
 	}
+
+
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Square Number " + id + " of " + getNumOfSquare() + " has the unique ID - " + getId() + "\nArea=" + findArea() + ", \nPerimeter=" + findPerimeter()
 		+ ", \nSide Length=" + getSideAlpha() + ", \nColor=" + getColor();
 	}
+	/**
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -510,6 +567,11 @@ class Square extends TwoDimensional{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -526,10 +588,58 @@ class Square extends TwoDimensional{
 
 }
 
+/**
+ * <pre>Concrete implementation of mathematical shape Rhombus in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical square for
+ *     YonglinDB. The Rhombus object can be instantiated with these vital pieces of information - side length, height,
+ *     and the color of the shape.
+ * </p>
+ * <p>
+ *     The Rhombus objects contain an array of behaviors that enables users to document square shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.TwoDimensional
+ * @see com.yonglinwang.Square
+ */
 class Rhombus extends Square{
+	/**
+	 * Class level counter variable that keeps track of the number of Rhombus instantiated.
+	 */
 	private static int numOfRhombus = 0;
+	/**
+	 * The variable that contains the height of the Rhombus instance.
+	 */
 	private double height;
+	/**
+	 * The unique identification digit of the instance. Used for Square # of #
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a Rhombus instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a Square. Which includes calling the parent
+	 *     constructor to apply the color and side length, assigning the height and id digit, increments the number of
+	 *     counter if the object instantiated is equal to a Rhombus.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the Rhombus constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to Rhombus.class
+	 *     will the counter increment.
+	 * </p>
+	 * @param sideAlpha The side length of the Rhombus instance, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height The side length of the Rhombus instance, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public Rhombus(double sideAlpha, double height, Color color){
 		super(sideAlpha,color);
 		this.height = height;
@@ -537,28 +647,76 @@ class Rhombus extends Square{
 			numOfRhombus++;
 		id = numOfRhombus;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public Rhombus(){
 		this(0,0, Color.black);
 	}
+
+
+	/**
+	 * <pre>Accessor method for user agents to access the height property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     Height is a crucial property of Rhombus. It can be used in the calculation of the area of the Rhombus.
+	 * </p>
+	 * @return The height of the Rhombus instance
+	 */
 	public double getHeight() {
 		return height;
 	}
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Height is a crucial property of Rhombus. It can be used in the calculation of the area of the Rhombus.
+	 * </p>
+	 * @param height Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
 	public void setHeight(double height) {
 		this.height = height;
 	}
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of Rhombus instantiated.
+	 */
 	public static int getNumOfRhombus() {
 		return numOfRhombus;
 	}
 
+
+	/**
+	 * <pre>Process the area of a square instance in YonglinDB</pre>
+	 * Calculates and returns the area of the Rhombus using the area formula:
+	 * <p>{@code A = ah}</p>
+	 * @return The area of the instance Rhombus.
+	 */
 	@Override
 	public double findArea() {
 		return getSideAlpha() * getHeight();
 	}
+	/*
+	 * findPerimeter method was omitted due to similarities in calculation procedures between Rhombus and Square.
+	 */
+
+
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Rhombus Number " + id + " of " + getNumOfRhombus() + " has the unique ID - " + getId() + " \nHeight=" + getHeight() + ", \nArea=" + findArea()
 		+ ", \nPerimeter=" + findPerimeter() + ", Side Length=" + getSideAlpha()+ ", \nColor=" + getColor();
 	}
+	/**
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -568,6 +726,11 @@ class Rhombus extends Square{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -584,11 +747,60 @@ class Rhombus extends Square{
 
 }
 
-
+/**
+ * <pre>Concrete implementation of mathematical shape Parallelogram in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical square for
+ *     YonglinDB. The Parallelogram object can be instantiated with these vital pieces of information - side A length,
+ *     height, side B length and the color of the shape.
+ * </p>
+ * <p>
+ *     The Parallelogram objects contain an array of behaviors that enables users to document square shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.TwoDimensional
+ * @see com.yonglinwang.Square
+ * @see com.yonglinwang.Rhombus
+ */
 class Parallelogram extends Rhombus{
+	/**
+	 * Class level counter variable that keeps track of the number of Parallelogram instantiated.
+	 */
 	private static int numOfParallelograms = 0;
+	/**
+	 * The variable that contains the side B length of the Parallelogram instance.
+	 */
 	private double sideBravo;
+	/**
+	 * The unique identification digit of the instance. Used for "Parallelogram # of #"
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a Parallelogram instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a Parallelogram. Which includes calling the parent
+	 *     constructor to apply the color and side A length and height, assigning the side B length and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a Parallelogram.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the Parallelogram constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to Parallelogram.class
+	 *     will the counter increment.
+	 * </p>
+	 * @param sideAlpha Side length used for calculating area, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public Parallelogram(double sideAlpha, double sideBravo, double height, Color color){
 		super(sideAlpha,height,color);
 		this.sideBravo = sideBravo;
@@ -596,31 +808,76 @@ class Parallelogram extends Rhombus{
 			numOfParallelograms++;
 		id = numOfParallelograms;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public Parallelogram(){
 		this(0,0,0, Color.black);
 	}
 
-	public void setSideBravo(double sideBravo) {
-		this.sideBravo = sideBravo;
-	}
 
+	/**
+	 * <pre>Accessor method for user agents to access the Side B property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     Side B is a crucial property of Parallelogram. It can be used in the calculation of the perimeter of the Parallelogram.
+	 * </p>
+	 * @return The height of the Parallelogram instance
+	 */
 	public double getSideBravo() {
 		return sideBravo;
 	}
-
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Side B is a crucial property of Parallelogram. It can be used in the calculation of the perimeter of the Parallelogram.
+	 * </p>
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
+	public void setSideBravo(double sideBravo) {
+		this.sideBravo = sideBravo;
+	}
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of Parallelogram instantiated.
+	 */
 	public static int getNumOfParallelograms() {
 		return numOfParallelograms;
 	}
 
+
+	/**
+	 * <pre>Process the perimeter of a Parallelogram instance in YonglinDB</pre>
+	 * Calculates and returns the perimeter of the Parallelogram using the perimeter formula:
+	 * <p>{@code P = 2a*2b}</p>
+	 * @return The perimeter of the instance Parallelogram.
+	 */
 	@Override
 	public double findPerimeter() {
 		return 2 * getSideAlpha() * 2 * getSideBravo();
 	}
+	/*
+	 * findArea method was omitted due to similarities in calculation procedures between Rhombus and Square.
+	 */
+
+
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Parallelogram Number " + id + " of " + getNumOfParallelograms() + " has the unique ID - " + getId() + ", \nSideB=" + getSideBravo() + ", \nPerimeter="
 				+ findPerimeter() + ", \nHeight=" + getHeight() + ", \nArea=" + findArea() + ", \nSideA=" + getSideAlpha() + ", \nColor=" + getColor();
 	}
+	/**
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -630,6 +887,11 @@ class Parallelogram extends Rhombus{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -643,49 +905,172 @@ class Parallelogram extends Rhombus{
 			return false;
 		return true;
 	}
-
 }
 
+/**
+ * <pre>Concrete implementation of mathematical shape IsoscelesTrapezoid in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical IsoscelesTrapezoid for
+ *     YonglinDB. The IsoscelesTrapezoid object can be instantiated with these vital pieces of information - side A length, height,
+ *     side B length, Side C length, and the color of the shape.
+ * </p>
+ * <p>
+ *     The IsoscelesTrapezoid objects contain an array of behaviors that enables users to document square shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.TwoDimensional
+ * @see com.yonglinwang.Square
+ * @see com.yonglinwang.Rhombus
+ * @see com.yonglinwang.Parallelogram
+ */
 class IsoscelesTrapezoid extends Parallelogram{
+	/**
+	 * Class level counter variable that keeps track of the number of IsoscelesTrapezoid instantiated.
+	 */
 	private static int numOfIsoscelesTrapezoid = 0;
+	/**
+	 * The variable that contains the side B length of the IsoscelesTrapezoid instance.
+	 */
 	private double sideCharlie;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a IsoscelesTrapezoid instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a IsoscelesTrapezoid. Which includes calling the parent
+	 *     constructor to apply the color and side A length, side B length and height, assigning the side C length and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a IsoscelesTrapezoid.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the IsoscelesTrapezoid constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to IsoscelesTrapezoid.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * <h2>Diagram for assistance</h2>
+	 * <pre>
+	 *     		      sideAlpha
+	 *		      	   ______
+	 *	sideCharlie-> / 	 \ <- sideCharlie
+	 * 		         /		  \
+	 * 		         ----------
+	 *                sideBravo
+	 * </pre>
+	 *
+	 * @param sideAlpha Side length used for calculating area, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideBravo Side length used for calculating area, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideCharlie Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public IsoscelesTrapezoid(double sideAlpha, double sideBravo, double sideCharlie, double height, Color color){
 		super(sideAlpha, sideBravo, height, color);
 		this.sideCharlie = sideCharlie;
 		if (this.getClass() == IsoscelesTrapezoid.class)
 			numOfIsoscelesTrapezoid++;
+		id = numOfIsoscelesTrapezoid;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public IsoscelesTrapezoid(){
 		this(0,0,0,0,Color.black);
 	}
 
-	public void setSideCharlie(double sideCharlie) {
-		this.sideCharlie = sideCharlie;
-	}
 
+	/**
+	 * <pre>Accessor method for user agents to access the Side C property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     Side C is a crucial property of IsoscelesTrapezoid. It can be used in the calculation of the perimeter of the IsoscelesTrapezoid.
+	 * </p>
+	 * @return The length of side C of the IsoscelesTrapezoid instance
+	 */
 	public double getSideCharlie() {
 		return sideCharlie;
 	}
 
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Side C is a crucial property of IsoscelesTrapezoid. It can be used in the calculation of the perimeter of the IsoscelesTrapezoid.
+	 * </p>
+	 * @param sideCharlie Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
+	public void setSideCharlie(double sideCharlie) {
+		this.sideCharlie = sideCharlie;
+	}
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of IsoscelesTrapezoid instantiated.
+	 */
 	public static int getNumOfIsoscelesTrapezoid() {
 		return numOfIsoscelesTrapezoid;
 	}
 
+
+	/**
+	 * <pre>Process the perimeter of a IsoscelesTrapezoid instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the perimeter of the IsoscelesTrapezoid using the perimeter formula:
+	 * <p>{@code P = a + b + 2c}</p>
+	 * @return The perimeter of the instance IsoscelesTrapezoid.
+	 */
 	@Override
 	public double findPerimeter() {
 		return getSideAlpha() + getSideBravo() + 2 * getSideCharlie();
 	}
-
+	/**
+	 * <pre>Process the area of a IsoscelesTrapezoid instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the area of the IsoscelesTrapezoid using the area formula:
+	 * <p>{@code P = (a + b)/2 * h}</p>
+	 * @return The area of the instance IsoscelesTrapezoid.
+	 */
 	@Override
 	public double findArea() {
 		return (getSideAlpha() + getSideBravo()) / 2 * getHeight();
 	}
+
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "IsoscelesTrapezoid Number " + id + " of " + getNumOfIsoscelesTrapezoid() + " has the unique ID - " + getId() + "\nSideC=" + sideCharlie + ", \nPerimeter=" + findPerimeter() + ", \nArea=" + findArea() + ", \nSideB="
 				+ getSideBravo() + ", \nHeight=" + getHeight() + ", \nSideA=" + getSideAlpha() + ", \ngetColor()=" + getColor();
 	}
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -695,6 +1080,14 @@ class IsoscelesTrapezoid extends Parallelogram{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -710,73 +1103,206 @@ class IsoscelesTrapezoid extends Parallelogram{
 	}
 
 }
-
+/**
+ * <pre>Concrete implementation of mathematical shape Kite in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical Kite for
+ *     YonglinDB. The Kite object can be instantiated with these vital pieces of information - side A length, height,
+ *     side B length, Side C length, and the color of the shape.
+ * </p>
+ * <p>
+ *     The Kite objects contain an array of behaviors that enables users to document square shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.TwoDimensional
+ * @see com.yonglinwang.Square
+ * @see com.yonglinwang.Rhombus
+ * @see com.yonglinwang.Parallelogram
+ * @see com.yonglinwang.IsoscelesTrapezoid
+ */
 final class Kite extends IsoscelesTrapezoid{
-	private int id;
+	/**
+	 * Class level counter variable that keeps track of the number of IsoscelesTrapezoid instantiated.
+	 */
 	private static int numOfKite = 0;
-	private double sideBravo;
-	public Kite(double sideAlpha, double sideBravo, double diagonalp, double diagonalq, Color color){
-		super(sideAlpha,sideBravo,diagonalp,diagonalq,color);
-		this.sideBravo = sideBravo;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
+	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a IsoscelesTrapezoid instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a IsoscelesTrapezoid. Which includes calling the parent
+	 *     constructor to apply the color and side A length, side B length and height, assigning the side C length and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a IsoscelesTrapezoid.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the IsoscelesTrapezoid constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to IsoscelesTrapezoid.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * <h2>Diagram for assistance</h2>
+	 * <pre>
+	 *     	       diagonalQ
+	 *     		      /|\
+	 *   sideAlpha-> / | \
+	 *     		    /__|__\ diagonalP
+	 *     	        \  |  /
+	 *     	         \ | / <-sideBravo
+	 *     	          \|/
+	 * </pre>
+	 *
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param diagonalP Used for calculating area, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param diagonalQ Used for calculating area, must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
+	public Kite(double sideAlpha, double sideBravo, double diagonalP, double diagonalQ, Color color){
+		super(sideAlpha,sideBravo,diagonalP,diagonalQ,color);
 		numOfKite++;
 		id = numOfKite;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public Kite(){
 		this(0,0,0,0,Color.black);
 	}
 
-	public void setSideBravo(double sideBravo) {
-		this.sideBravo = sideBravo;
-	}
 
-	public double getSideBravo() {
-		return sideBravo;
-	}
-
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of Kite instantiated.
+	 */
 	public static int getNumOfKite() {
 		return numOfKite;
 	}
 
+
+	/**
+	 * <pre>Process the perimeter of a Kite instance in YonglinDB</pre>
+	 * Calculates and returns the perimeter of the IsoscelesTrapezoid using the perimeter formula:
+	 * <p>{@code P = 2a + 2b}</p>
+	 * @return The perimeter of the instance Kite.
+	 */
 	@Override
 	public double findPerimeter() {
 		return 2 * (getSideAlpha() * getSideBravo());
 	}
+	/**
+	 * <pre>Process the area of a Kite instance in YonglinDB</pre>
+	 * Calculates and returns the area of the Kite using the area formula:
+	 * <p>{@code A = (p * q)/2}</p>
+	 * @return The area of the instance Kite.
+	 */
+	@Override
+	public double findArea() {
+		return (getHeight()*getSideCharlie())/2;
+	}
+
+
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Kite Number " + id + " of " + getNumOfKite() + " has the unique ID - " + getId() + "\nSideB=" + getSideBravo() + ", \nPerimeter="
 				+ findPerimeter() + ", \nArea=" + findArea() + ", \nSideAlpha=" + getSideAlpha()
 				+ ", \nColor=" + getColor();
 	}
+	/**
+	 * @param o The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		Kite kite = (Kite) o;
+
+		return id == kite.id;
+	}
+	/**
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
 		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(sideBravo);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = 31 * result + id;
 		return result;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Kite other = (Kite) obj;
-		if (Double.doubleToLongBits(sideBravo) != Double.doubleToLongBits(other.sideBravo))
-			return false;
-		return true;
-	}
-
 }
 
-
+/**
+ * <pre>Concrete implementation of mathematical shape Cube in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical Cube for
+ *     YonglinDB. The Cube object can be instantiated with these vital pieces of information - side A length and the color of the shape.
+ * </p>
+ * <p>
+ *     The Cube objects contain an array of behaviors that enables users to document Cube shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.ThreeDimensional
+ */
 class Cube extends ThreeDimensional{
+	/**
+	 * Class level counter variable that keeps track of the number of Cube instantiated.
+	 */
 	private static int numOfCubes = 0;
-	private int id;
+	/**
+	 * The side length of the instance.
+	 */
 	private double sideAlpha;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
+	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a Cube instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a Cube. Which includes calling the parent
+	 *     constructor to apply the color, assigning the side length and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a Cube.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the Cube constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to Cube.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public Cube(double sideAlpha, Color color){
 		super(color);
 		this.sideAlpha = sideAlpha;
@@ -784,36 +1310,94 @@ class Cube extends ThreeDimensional{
 			numOfCubes++;
 		id = numOfCubes;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public Cube(){
 		this(0, Color.black);
 	}
 
-	public void setSideAlpha(double sideAlpha) {
-		this.sideAlpha = sideAlpha;
-	}
 
+	/**
+	 * <pre>Accessor method for user agents to access the Side length property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     Side length is a crucial property of Cube. It can be used in the calculation of the perimeter and area of the Cube.
+	 * </p>
+	 * @return The length of side length of the Cube instance
+	 */
 	public double getSideAlpha() {
 		return sideAlpha;
 	}
-
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Side A is a crucial property of Cube. It can be used in the surface area and the volume of a Cube.
+	 * </p>
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
+	public void setSideAlpha(double sideAlpha) {
+		this.sideAlpha = sideAlpha;
+	}
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of Kite instantiated.
+	 */
 	public static int getNumOfCubes() {
 		return numOfCubes;
 	}
 
+
+	/**
+	 * <pre>Process the surface area of a Cube instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the surface area of the Cube using the surface area formula:
+	 * <p>{@code A = 6a^2}</p>
+	 * @return The surface area of the instance Cube.
+	 */
 	@Override
 	public double findSurfaceArea() {
 		return getSideAlpha() * getSideAlpha() * 6;
 	}
-
+	/**
+	 * <pre>Process the volume of a Cube instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the volume of the Cube using the volume formula:
+	 * <p>{@code V = a^3}</p>
+	 * @return The volume of the instance Cube.
+	 */
 	@Override
 	public double findVolume() {
 		return getSideAlpha() * getSideAlpha() * getSideAlpha();
 	}
+
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Cube Number " + id + " of " + getNumOfCubes() + " has the unique ID - " + getId() + "\nSideAlpha=" + getSideAlpha() + ", \nSurface Area="
 				+ findSurfaceArea() + ", \nVolume=" + findVolume() + ", \nColor=" + getColor();
 	}
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -823,6 +1407,14 @@ class Cube extends ThreeDimensional{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -839,10 +1431,59 @@ class Cube extends ThreeDimensional{
 
 }
 
+/**
+ * <pre>Concrete implementation of mathematical shape SquareBasedPrism in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical SquareBasedPrism for
+ *     YonglinDB. The Cube object can be instantiated with these vital pieces of information - side A length, height and the color
+ *     of the shape.
+ * </p>
+ * <p>
+ *     The Cube objects contain an array of behaviors that enables users to document SquareBasedPrism shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.ThreeDimensional
+ * @see com.yonglinwang.Cube
+ */
 class SquareBasedPrism extends Cube{
+	/**
+	 * Class level counter variable that keeps track of the number of SquareBasedPrism instantiated.
+	 */
 	private static int numOfSquareBasedPrism = 0;
+	/**
+	 * The height of the instance.
+	 */
 	private double height;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a SquareBasedPrism instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a SquareBasedPrism. Which includes calling the parent
+	 *     constructor to apply the color and the side length , assigning the height and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a SquareBasedPrism.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the SquareBasedPrism constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to SquareBasedPrism.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public SquareBasedPrism(double sideAlpha, double height, Color color){
 		super(sideAlpha, color);
 		this.height = height;
@@ -850,36 +1491,90 @@ class SquareBasedPrism extends Cube{
 			numOfSquareBasedPrism++;
 		id = numOfSquareBasedPrism;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public SquareBasedPrism(){
 		this(0,0,Color.black);
 	}
 
+
+	/**
+	 * <pre>Accessor method for user agents to access the height property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     Height is a crucial property of SquareBasedPrism. It can be used in the calculation of the surface area and volume of
+	 *     the SquareBasedPrism.
+	 * </p>
+	 * @return The length of side length of the SquareBasedPrism instance
+	 */
 	public double getHeight() {
 		return height;
 	}
-
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Height is a crucial property of SquareBasedPrism. It can be used in the surface area and the volume of a SquareBasedPrism.
+	 * </p>
+	 * @param height Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
 	public void setHeight(double height) {
 		this.height = height;
 	}
-
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of SquareBasedPrism instantiated.
+	 */
 	public static int getNumOfSquareBasedPrism() {
 		return numOfSquareBasedPrism;
 	}
 
+
+	/**
+	 * <pre>Process the surface area of a SquareBasedPrism instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the surface area of the SquareBasedPrism using the surface area formula:
+	 * <p>{@code A = 2a^2 + 4ah}</p>
+	 * @return The surface area of the instance SquareBasedPrism.
+	 */
 	@Override
 	public double findSurfaceArea() {
 		return 2 * (getSideAlpha() * getSideAlpha()) + 4 * (getSideAlpha() * getHeight());
 	}
-
+	/**
+	 * <pre>Process the volume of a Cube instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the volume of the Cube using the volume formula:
+	 * <p>{@code V = a^2 * h}</p>
+	 * @return The volume of the instance Cube.
+	 */
 	@Override
 	public double findVolume() {
 		return (getSideAlpha()*getSideAlpha()) * getHeight();
 	}
+	/**
+	 * {@inheritDoc}
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Square Based Prism Number " + id + " of " + getNumOfSquareBasedPrism() + " has the unique ID - " + getId() + "\nHeight=" + getHeight() + ", \nSurface Area="
 				+ findSurfaceArea() + ", \nVolume=" + findVolume() + ", \nSideAlpha=" + getSideAlpha() + ", \nColor=" + getColor();
 	}
+	/**
+	 * {@inheritDoc}
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -889,6 +1584,12 @@ class SquareBasedPrism extends Cube{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * {@inheritDoc}
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -905,10 +1606,61 @@ class SquareBasedPrism extends Cube{
 
 }
 
+/**
+ * <pre>Concrete implementation of mathematical shape RectangularPrism in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical RectangularPrism for
+ *     YonglinDB. The Cube object can be instantiated with these vital pieces of information - side A length, side B length
+ *     height and the color of the shape.
+ * </p>
+ * <p>
+ *     The Cube objects contain an array of behaviors that enables users to document RectangularPrism shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.ThreeDimensional
+ * @see com.yonglinwang.Cube
+ * @see com.yonglinwang.SquareBasedPrism
+ */
 class RectangularPrism extends SquareBasedPrism{
+	/**
+	 * Class level counter variable that keeps track of the number of SquareBasedPrism instantiated.
+	 */
 	private static int numOfRectangularPrism = 0;
+	/**
+	 * The side b length of the instance.
+	 */
 	private double sideBravo;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a RectangularPrism instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a RectangularPrism. Which includes calling the parent
+	 *     constructor to apply the color and the side length A and height, assigning the side length B and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a RectangularPrism.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the RectangularPrism constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to RectangularPrism.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public RectangularPrism(double sideAlpha, double sideBravo, double height, Color color){
 		super(sideAlpha, height, color);
 		this.sideBravo = sideBravo;
@@ -916,37 +1668,91 @@ class RectangularPrism extends SquareBasedPrism{
 			numOfRectangularPrism++;
 		id = numOfRectangularPrism;
 	}
+	/**
+	 * The Default Constructor
+	 */
 	public RectangularPrism(){
 		this(0,0,0,Color.black);
 	}
 
+
+	/**
+	 * <pre>Accessor method for user agents to access the side B property of the instance</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     side B is a crucial property of RectangularPrism. It can be used in the calculation of the surface area and volume of
+	 *     the RectangularPrism.
+	 * </p>
+	 * @return The length of side length of the RectangularPrism instance
+	 */
 	public double getSideBravo() {
 		return sideBravo;
 	}
-
+	/**
+	 * <pre>Modifier method that allows agents to change the property</pre>
+	 * <p>
+	 *     Height is a crucial property of RectangularPrism. It can be used in the surface area and the volume of a RectangularPrism.
+	 * </p>
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 */
 	public void setSideBravo(double sideBravo) {
 		this.sideBravo = sideBravo;
 	}
-
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of RectangularPrism instantiated.
+	 */
 	public static int getNumOfRectangularPrism() {
 		return numOfRectangularPrism;
 	}
 
+
+	/**
+	 * <pre>Process the volume of a Cube instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the volume of the Cube using the volume formula:
+	 * <p>{@code V = a * b * h}</p>
+	 * @return The volume of the instance Cube.
+	 */
 	@Override
 	public double findVolume() {
 		return getSideAlpha() * getSideBravo() * getHeight();
 	}
-
+	/**
+	 * <pre>Process the surface area of a RectangularPrism instance in YonglinDB</pre>
+	 *
+	 * {@inheritDoc}
+	 *
+	 * Calculates and returns the surface area of the SquareBasedPrism using the surface area formula:
+	 * <p>{@code A = 2ab +2ah + 2bh}</p>
+	 * @return The surface area of the instance RectangularPrism.
+	 */
 	@Override
 	public double findSurfaceArea() {
 		return getSideAlpha() * getSideBravo() * 2 + getHeight() * getSideAlpha() * 2 + getHeight() * getSideBravo() * 2;
 	}
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "RectangularPrism Number " + id + " of " + getNumOfRectangularPrism() + " has the unique ID - " + getId() + "\nSideBravo=" + getSideBravo() + ", \nVolume="
 				+ findVolume() + ", \nSurfaceArea=" + findSurfaceArea() + ", \nHeight=" + getHeight() + ", \nSideAlpha=" + getSideAlpha() + ", \nColor="
 				+ getColor();
 	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -956,6 +1762,12 @@ class RectangularPrism extends SquareBasedPrism{
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+	/**
+	 * {@inheritDoc}
+	 * @param obj The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -972,34 +1784,129 @@ class RectangularPrism extends SquareBasedPrism{
 
 }
 
-class RegularPentagonalPyramid extends RectangularPrism{
+/**
+ * <pre>Concrete implementation of mathematical shape RegularPentagonalPyramid in YonglinDB</pre>
+ * <h2>Class Explanation</h2>
+ * <p>
+ *     Inheritable, Instantiable class that implements the properties and functionality of a mathematical RegularPentagonalPyramid for
+ *     YonglinDB. The Cube object can be instantiated with these vital pieces of information - side A length, side B length
+ *     height and the color of the shape.
+ * </p>
+ * <p>
+ *     The Cube objects contain an array of behaviors that enables users to document RegularPentagonalPyramid shapes in YonglinDB, including
+ *     accessors and modifier of properties. Proper toString, hashcode, and equals method.
+ * </p>
+ *
+ * @author Yonglin Wang
+ * @version 1.2
+ *
+ * @see com.yonglinwang.Shape
+ * @see com.yonglinwang.ThreeDimensional
+ * @see com.yonglinwang.Cube
+ * @see com.yonglinwang.SquareBasedPrism
+ * @see com.yonglinwang.RectangularPrism
+ */
+final class RegularPentagonalPyramid extends RectangularPrism{
+	/**
+	 * Class level counter variable that keeps track of the number of SquareBasedPrism instantiated.
+	 */
 	private static int numOfRegularPentagonalPyramid = 0;
+	/**
+	 * The unique identification digit of the instance. Used for "IsoscelesTrapezoid # of #"
+	 */
 	private int id;
+
+
+	/**
+	 * <pre>Construct and instantiate a RegularPentagonalPyramid instance for YonglinDB</pre>
+	 * <h2>Method Explanation</h2>
+	 * <p>
+	 *     The constructor executes a list of procedures when constructing a RegularPentagonalPyramid. Which includes calling the parent
+	 *     constructor to apply the color and the side length A and height, assigning the side length B and id digit, increments
+	 *     the number of counter if the object instantiated is equal to a RectangularPrism.
+	 * </p>
+	 * <p>
+	 *     To prevent recounting when subclasses call the RegularPentagonalPyramid constructor as a parent constructor, a sanity check is
+	 *     initiated whenever the instance is being constructed. Only if the class instantiated is equal to RegularPentagonalPyramid.class
+	 *     will the counter increment.
+	 * </p>
+	 *
+	 * @param sideAlpha Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param sideBravo Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param height Must be a value >= 0 and less than Double.MAX_VALUE
+	 * @param color The name of the color, must be a standard AWT color.
+	 */
 	public RegularPentagonalPyramid(double sideAlpha, double sideBravo, double height, Color color) {
 		super(sideAlpha, sideBravo, height, color);
 		numOfRegularPentagonalPyramid++;
 		id = numOfRegularPentagonalPyramid;
 	}
-
+	/**
+	 * <pre>Accessor method for the class level instance counter</pre>
+	 * <p>
+	 *  	This method serves the same purpose as the page counter in Office Word. The class variable is incremented whenever
+	 *  	the constructor is called. Which could be accessed through this method.
+	 * </p>
+	 * @return The number of RegularPentagonalPyramid instantiated.
+	 */
 	public static int getNumOfRegularPentagonalPyramid() {
 		return numOfRegularPentagonalPyramid;
 	}
 
+
+	/**
+	 * <pre>Process the volume of a Cube instance in YonglinDB</pre>
+	 * Calculates and returns the volume of the Cube using the volume formula:
+	 * <p>{@code Too complex to display}</p>
+	 * @return The volume of the instance Cube.
+	 */
 	@Override
 	public double findVolume() {
 		return 5 / 12 * Math.tan(54) * getHeight() * (getSideAlpha() * getSideAlpha());
 	}
-
+	/**
+	 * <pre>Process the surface area of a RectangularPrism instance in YonglinDB</pre>
+	 * Calculates and returns the surface area of the SquareBasedPrism using the surface area formula:
+	 * <p>{@code Too complex to display}</p>
+	 * @return The surface area of the instance RectangularPrism.
+	 */
 	@Override
 	public double findSurfaceArea() {
 		return 1.25 * Math.tan(54) * (getSideAlpha() * getSideAlpha()) + 5 * (getSideAlpha() / 2) * Math.sqrt((getHeight() * getHeight())+((getSideAlpha()*Math.tan(54)/2)*(getSideAlpha()*Math.tan(54)/2)));
 	}
-
+	/**
+	 * @return A String containing all the information regarding the instance
+	 * @see Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Regular Pentagonal Pyramid Number " + id + " of " + getNumOfRegularPentagonalPyramid() + " has the unique ID - " + getId() + "\nVolume()=" + findVolume() + ", \nSurfaceArea=" + findSurfaceArea()
 		+ ", \nSideBravo()=" + getSideBravo() + ", \nHeight=" + getHeight() + ", \nSideAlpha=" + getSideAlpha() + ", Color=" + getColor();
 	}
+	/**
+	 * @param o The object to compare the instance to
+	 * @return True if the param is exactly the instance or if all the properties matches.
+	 * @see Object#equals(Object)
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
 
+		RegularPentagonalPyramid that = (RegularPentagonalPyramid) o;
+
+		return id == that.id;
+	}
+	/**
+	 * @return The hashcode of the instance for hash listing
+	 * @see Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + id;
+		return result;
+	}
 }
 

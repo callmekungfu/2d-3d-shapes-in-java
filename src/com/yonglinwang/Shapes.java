@@ -13,8 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.yonglinwang.util.InputReader;
-import com.yonglinwang.util.Listening;
-import com.yonglinwang.util.Prompting;
+import com.yonglinwang.util.Listener;
+import com.yonglinwang.util.Prompter;
 
 /**
  * <h1>YonglinDB</h1>
@@ -56,18 +56,19 @@ import com.yonglinwang.util.Prompting;
  * </ul>
  * Crafted by Yonglin Wang through May.
  * @version 1.2.1
+ * @since JDK7.0
  */
 public final class Shapes {
 	/**
 	 * This creates a global prompting system to allow methods to
 	 * display prompts to users.
 	 */
-	private Prompting p = new Prompting();
+	private Prompter p = new Prompter();
 	/**
 	 * This creates a global listening system to allow methods to
 	 * display listen to user input.
 	 */
-	private Listening listen = new Listening();
+	private Listener listen = new Listener();
 	/**
 	 * This is the object that will be storing all the records. Declared
 	 * globally so all use class methods can utilize it.
@@ -84,8 +85,8 @@ public final class Shapes {
 	 * 
 	 */
 	public static void main(String[] args) {
-		Prompting p = new Prompting();
-		Listening listen = new Listening();
+		Prompter p = new Prompter();
+		Listener listen = new Listener();
 		Shapes local = new Shapes();
 
 		boolean inMenu = true;
@@ -149,7 +150,7 @@ public final class Shapes {
 	 * <ul>
 	 *     <li>[InputReader input] - the InputReader toolkit from Yonglin Utility Pack to read file.</li>
 	 * </ul>
-	 * @see com.yonglinwang.util.Prompting
+	 * @see Prompter
 	 */
 	private void printHelp(){
 		InputReader input;
